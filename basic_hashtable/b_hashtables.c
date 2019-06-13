@@ -124,7 +124,7 @@ void hash_table_remove(BasicHashTable *ht, char *key) {
 char *hash_table_retrieve(BasicHashTable *ht, char *key) {
   unsigned int hashed_index = hash(key, ht->capacity);
 
-  if (ht->storage[hashed_index] == NULL || (strcmp(ht->storage[hashed_index]->key, key) != 0)) {
+  if (ht->storage[hashed_index] == NULL || strcmp(ht->storage[hashed_index]->key, key) != 0) {
     printf("Key not found\n");
     return NULL;
   } else {
@@ -139,7 +139,7 @@ char *hash_table_retrieve(BasicHashTable *ht, char *key) {
  ****/
 void destroy_hash_table(BasicHashTable *ht) {
   for (int i = 0; i < ht->capacity; i++) {
-    if (ht->storage != NULL) {
+    if (ht->storage[i] != NULL) {
       destroy_pair(ht->storage[i]);
     }
   }
